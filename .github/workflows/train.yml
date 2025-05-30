@@ -17,4 +17,4 @@ jobs:
       - name: Install dependencies
         run: pip install Flask scikit-learn pandas numpy pytest
       - name: Train Model
-        run: python src/train_model.py
+        run: python src/train.py
