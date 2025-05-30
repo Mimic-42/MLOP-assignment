@@ -1,0 +1,36 @@
+name: Deploy using GCP Self-Hosted Runner
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    name: Deploy on Self-Hosted Runner
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install Flask scikit-learn pandas numpy pytest
+          pip install pytest
+
+      - name: Run tests
+        run: pytest
+
+      - name: Build Docker image
+        run: docker build -t health-risk-app .
+
+      - name: Run container (locally on the VM)
+        run: |
+          docker stop health-risk-app || true
+          docker rm health-risk-app || true
+          docker run -d -p 5000:5000 --name health-risk-app health-risk-app
