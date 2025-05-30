@@ -1,23 +1,28 @@
+# generate_dataset.py
+
 import pandas as pd
 import numpy as np
 
 np.random.seed(42)
-n_samples = 200
 
-# Two numerical features
-feature1 = np.random.normal(0, 1, n_samples)
-feature2 = np.random.normal(2, 1.5, n_samples)
+n_samples = 500
 
-# Binary target: 1 if sum of features > 2, else 0
-target = (feature1 + feature2 > 2).astype(int)
+# Generate synthetic features
+ages = np.random.randint(20, 80, n_samples)
+cholesterol = np.random.randint(150, 300, n_samples)
 
-# Create DataFrame
+# Basic rule for risk (not perfectly linear to add some noise)
+risk = [
+    1 if (a > 50 and c > 220) or (c > 250) else 0
+    for a, c in zip(ages, cholesterol)
+]
+
 df = pd.DataFrame({
-    'feature1': feature1,
-    'feature2': feature2,
-    'target': target
+    "age": ages,
+    "cholesterol_level": cholesterol,
+    "risk_level": risk
 })
 
-# Save to CSV
-df.to_csv("raw.csv", index=False)
-print("✅ Dataset saved as data/raw.csv")
+df.to_csv("health_data.csv", index=False)
+print("✅ Dataset saved to data/health_data.csv")
+
