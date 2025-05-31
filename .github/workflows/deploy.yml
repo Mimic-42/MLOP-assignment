@@ -35,7 +35,7 @@ jobs:
         run: |
           mkdir -p $HOME/.kube
           sudo cp /home/docker/.kube/config $HOME/.kube/config
-          sudo chown $(id -u):$(id -g) $HOME/.kube/config
+          sudo chown -R docker:docker $HOME/.kube/config
 
       - name: Deploy to Kubernetes
         run: |
