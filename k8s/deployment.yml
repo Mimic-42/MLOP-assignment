@@ -1,19 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ml-api
+  name: health-risk-app
+  labels:
+    app: health-risk
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ml-api
+      app: health-risk
   template:
     metadata:
       labels:
-        app: ml-api
+        app: health-risk
     spec:
       containers:
-      - name: ml-api
-        image: <your-dockerhub-username>/ml-api:latest
+      - name: health-risk-container
+        image: prajwalkrish/mlops-health-risk-api:latest
         ports:
         - containerPort: 5000
+
