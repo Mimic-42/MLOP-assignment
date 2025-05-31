@@ -34,7 +34,7 @@ jobs:
       - name: Set up KUBECONFIG for Minikube
         run: |
           mkdir -p $HOME/.kube
-          sudo cp /root/.kube/config $HOME/.kube/config
+          sudo cp /home/docker/.kube/config $HOME/.kube/config
           sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
       - name: Deploy to Kubernetes
