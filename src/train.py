@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegression
 import joblib
 
 # Load dataset
-df = pd.read_csv("../data/health_data.csv")
+df = pd.read_csv("data/health_data.csv")
 
 # Features and target
 X = df[["age", "cholesterol_level"]]
