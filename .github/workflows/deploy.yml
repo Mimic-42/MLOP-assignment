@@ -13,18 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'
-
-      - name: Install dependencies
+      - name: Install dependencies and run tests
         run: |
-          pip install -r requirements.txt
-          pip install pytest
-
-      - name: Run tests
-        run: pytest
+          python3.12 -m pip install --upgrade pip
+          python3.12 -m pip install -r requirements.txt
+          python3.12 -m pytest
 
       - name: Build Docker image
         run: docker build -t mlops-health-risk-api .
