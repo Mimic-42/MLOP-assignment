@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies and run tests
         run: |
           python3.12 -m pip install --upgrade pip
-          python3.12 -m pip install -r requirements.txt
+          python3.12 -m pip install Flask scikit-learn pandas numpy pytest joblib
           python3.12 -m pytest
 
       - name: Build Docker image
