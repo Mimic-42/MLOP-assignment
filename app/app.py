@@ -51,12 +51,6 @@ import joblib
 import os
 
 app = Flask(__name__)
-
-# # Load model.pkl from src folder
-# model_path = os.path.join(os.path.dirname(__file__), 'src', 'model.pkl')
-# with open(model_path, 'rb') as f:
-#     model = pickle.load(f)
-
     
 model_path = os.path.join(os.path.dirname(__file__), "..", "src", "model.pkl")
 model = joblib.load(model_path)
