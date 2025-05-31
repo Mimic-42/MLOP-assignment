@@ -35,6 +35,13 @@ jobs:
         run: |
           sudo chown -R docker:docker $HOME/.kube
 
+      - name: Debug - list files
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -la
+          echo "k8s directory contents:"
+          ls -la k8s
+
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f k8s/deployment.yaml
