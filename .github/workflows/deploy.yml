@@ -33,7 +33,7 @@ jobs:
 
       - name: Set up KUBECONFIG for Minikube
         run: |
-          sudo chown -R docker:docker $HOME/.kube
+          sudo chown -R prajwalachar666:prajwalachar666 $HOME/.kube
 
       - name: Debug - list files
         run: |
