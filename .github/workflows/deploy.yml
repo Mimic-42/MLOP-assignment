@@ -1,4 +1,4 @@
-name: Deploy using GCP Self-Hosted Runner
+name: Deploy to GCP VM via Docker
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy on Self-Hosted Runner
+    name: Deploy via Docker
     runs-on: self-hosted
 
     steps:
@@ -20,17 +20,17 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install Flask scikit-learn pandas numpy pytest
+          pip install -r requirements.txt
           pip install pytest
 
       - name: Run tests
         run: pytest
 
       - name: Build Docker image
-        run: docker build -t health-risk-app .
+        run: docker build -t mlops-health-risk-api .
 
-      - name: Run container (locally on the VM)
+      - name: Restart Docker container
         run: |
-          docker stop health-risk-app || true
-          docker rm health-risk-app || true
-          docker run -d -p 5000:5000 --name health-risk-app health-risk-app
+          docker stop mlops-health-risk-api || true
+          docker rm mlops-health-risk-api || true
+          docker run -d -p 5000:5000 --name mlops-health-risk-api mlops-health-risk-api
